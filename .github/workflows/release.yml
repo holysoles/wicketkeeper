@@ -58,14 +58,11 @@ jobs:
           cache-dependency-path: client/package-lock.json
 
       - name: Install npm dependencies and run script
-        env:
-          CHALLENGE_URL: ${{ vars.CHALLENGE_URL }}
         run: |
           cd client
-          env
           npm ci
-          npm run build:fast
-          npm run build:slow
+          CHALLENGE_URL${{ vars.CHALLENGE_URL }} npm run build:fast
+          CHALLENGE_URL${{ vars.CHALLENGE_URL }} npm run build:slow
           mv dist/ ../server/static
 
       - name: Install go dependencies
