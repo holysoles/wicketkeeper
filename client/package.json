@@ -4,9 +4,9 @@
   "description": "A proof-of-work captcha system.",
   "private": true,
   "scripts": {
-    "build:fast": "webpack --env solver=fast",
-    "build:slow": "webpack --env solver=slow",
-    "build:dev": "webpack --env solver=fast"
+    "build:fast": "webpack --env solver=fast --env CHALLENGE_URL",
+    "build:slow": "webpack --env solver=slow --env CHALLENGE_URL",
+    "build:dev": "webpack --env solver=fast --env CHALLENGE_URL"
   },
   "devDependencies": {
     "@babel/core": "^7.28.3",
