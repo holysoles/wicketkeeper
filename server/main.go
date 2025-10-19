@@ -27,7 +27,7 @@ var FS, _ = fs.Sub(assets, "static")
 
 func serveJS(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "public, max-age=2628000") // 1 month
-	w.Header().Set("Content-Type", "application/javascript")
+	w.Header().Set("Content-Type", "text/javascript")
 
 	data, err := fs.ReadFile(FS, r.URL.Path[1:]) // Path only have 2 value /fast.js and /slow.js
 	if err != nil {
