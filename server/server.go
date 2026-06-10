@@ -18,9 +18,10 @@ type Server struct {
 	allowedOrigins []string           // List of allowed origins for CORS.
 	redisClient    *redis.Client      // Redis client for storing challenge state.
 	checkAddScript *redis.Script      // Lua script for atomically checking and adding CIDs to Bloom filters.
+	rootUrl        string             // URL that the client JS should reference for posting/receiving challenges
 }
 
-func NewServer(difficulty int, allowedOrigins []string, privKey ed25519.PrivateKey, pubKey ed25519.PublicKey, redisAddr string, redisDB int) (*Server, error) {
+func NewServer(difficulty int, allowedOrigins []string, privKey ed25519.PrivateKey, pubKey ed25519.PublicKey, redisAddr string, redisDB int, rootUrl string) (*Server, error) {
 	rdb := redis.NewClient(&redis.Options{
 		Addr: redisAddr,
 		DB:   redisDB,
@@ -62,6 +63,7 @@ func NewServer(difficulty int, allowedOrigins []string, privKey ed25519.PrivateK
 		allowedOrigins: allowedOrigins,
 		redisClient:    rdb,
 		checkAddScript: checkAddScript,
+		rootUrl:        rootUrl,
 	}, nil
 }
 
