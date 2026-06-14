@@ -57,7 +57,7 @@ func NewServer(difficulty int, allowedOrigins []string, privKey ed25519.PrivateK
 		rdb.Del(ctx, "test_bloom_support")
 	}
 
-	var challengeJS map[string]string
+	challengeJS := map[string]string{}
 	for _, f := range []string{"fast.js", "slow.js"} {
 		var b bytes.Buffer
 		data := map[string]string{"url": rootUrl}
