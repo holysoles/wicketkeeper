@@ -9,6 +9,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io"
 	"io/fs"
 	"log"
 	"net/http"
@@ -263,10 +264,9 @@ func (s *Server) serveJS(w http.ResponseWriter, r *http.Request) {
 	name := path.Base(r.URL.Path)
 	switch name {
 	case "fast.js", "slow.js":
+		io.WriteString(w, s.challengeJS[name])
 	default:
 		http.NotFound(w, r)
 		return
 	}
-	data := map[string]string{"url": s.rootUrl}
-	_ = templates.ExecuteTemplate(w, name, data)
 }
